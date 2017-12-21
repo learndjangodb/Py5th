@@ -1,0 +1,6 @@
+# The next time you run your program, Python will load the .pyc files and skip the compilation step, as long as you haven’t changed your source code since the byte code was last saved.
+
+# That byte code is saved in files only for files that are imported, not for the top-level files of a program that are only run as scripts
+
+# Python programs into true executables, known as frozen binaries in the Python world. These programs can be run without equiring a Python installation.
+
