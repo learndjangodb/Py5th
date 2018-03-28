@@ -4,3 +4,238 @@
 
 # Python programs into true executables, known as frozen binaries in the Python world. These programs can be run without equiring a Python installation.
 
+# An attribute is simply a variable name that is attached to a specific object (like a module).
+
+Q) Why might you need to reload a module?
+
+A) Python imports (loads) a module only once per process, by default, so if you’ve changed its source code and want to run the new version without stopping and restarting Python, you’ll have to reload it. You must import a module at least once before you can reload it.
+
+Q) What is a namespace, and how does it relate to module files?
+
+A) A namespace is just a package of variables (i.e., names). It takes the form of an object with attributes in Python. Each module file is automatically a namespace— that is, a package of variables reflecting the assignments made at the top level of the file. Namespaces help avoid name collisions in Python programs: because each module file is a self-contained namespace, files must explicitly import other files in order to use their names.
+
+	$ B = bytearray(b'eggs')
+	$ B.extend(b'spam')
+	$ B.decode() # Translate to normal string
+
+# repr('spam') >> # Used by echoes: as-code form
+	"'spam'"
+# str('spam')  >> # # Used by print: user-friendly form
+	'spam'
+
+# floor >> Closest number below value
+
+# trunc >> Truncate fractional part (toward zero)
+
+# a.bit_length() or len(bin(a)) - 2
+
+**** from decimal import Decimal ****
+
+	>>> print 0.1+0.1+0.1-0.3
+	5.551115123e-17
+
+	>>> Decimal('0.1')+Decimal('0.1')+Decimal('0.1')-Decimal('0.3')
+	Decimal('0.0')
+
+	Decimal(1)/Decimal(4) # Default: 28 digits
+
+	$ decimal.getcontext().prec = 4
+
+**** from fractions import Fraction ****
+	x = Fraction(1, 3)
+	y = Fraction(2, 3)
+
+# Once created, Fraction s can be used in mathematical expressions as usual:
+
+	$ x + y >>> Fraction(1, 1)
+
+# Fraction objects can also be created from floating-point number strings.
+
+	$ Fraction('0.25') >>> Fraction(1, 4)
+
+# Moreover, fractions and decimals both allow more intuitive and accurate results than floating points sometimes can
+
+# >>> x > y, x < y  >>> # Superset, subset
+(False, False) 
+
+# Sets can be used to isolate differences in lists, strings, and other iterable objects too—
+# simply convert to sets and take the difference
+
+>>> set([1, 3, 5, 7]) - set([1, 2, 4, 5, 6])  # Find list differences
+{3, 7}
+
+# You can also use sets to perform order-neutral equality tests by converting to a set before the test, because order doesn’t matter in a set.
+
+>>> L1, L2 = [1, 3, 5, 2, 4], [2, 5, 3, 4, 1]
+>>> L1 == L2  # Order matters in sequences
+False
+
+>>> set(L1) == set(L2) # Order-neutral equality
+True
+
+# engineers > managers # Are all managers engineers? (superset)
+
+# These steps reflect the operation of all assignments in the Python language:
+	1. Create an object to represent the value 3 .
+	2. Create the variable a , if it does not yet exist.
+	3. Link the variable a to the new object 3 .
+
+	$ l1 = [2, 3, 4]
+	$ l2 = l1
+	$ l1[0] = 23
+	$ l1 >>> [23, 3, 4]
+	$ l2 >>> [23, 3, 4]
+
+	$ l3 = l1[:] # Make a copy of L1 (or list(L1), copy.copy(L1), etc.
+
+	# The change made through L1 is not reflected in L2 because L2 references a copy of the object L1 references, not the original; that is, the two variables point to different pieces of memory.
+
+import copy
+X = copy.copy(Y)  # Make top-level "shallow" copy of any object Y
+X = copy.deepcopy(Y)  # Make deep copy of any object Y: copy all nested parts
+
+>>> L = [1, 2, 3]
+>>> M = L	# M and L reference the same object
+>>> L == M	# Same Values
+True
+>>> L is M	# Same objects
+
+****************
+
+>>> L = [1, 2, 3]
+>>> M = [1, 2, 3]# M and L refernce different objects
+>>> L == M	# Same Values
+True
+>>> L is M	# Different objects
+False
+
+
+# The == operator, tests whether the two referenced objects have the same values;
+
+# The is operator, instead tests for object identity—it returns True only if both names point to the exact same object
+
+# The "getrefcount" function in the standard sys module returns the object’s reference count.
+
+# There are three string types: 
+	str is used for Unicode text (including ASCII),
+	bytes is used for binary data (including encoded text),
+	bytearray is a mutable variant of bytes .
+
+	>>> title = "Meaning " 'of' " Life"	# Implicit concatenation
+	>>> title
+	'Meaning of Life'
+
+page Number ******** 221 to 471 *********
+
+
+*** Functions ***
+
+# function is a device that groups a set of statements so they can be run more than once in a program.
+
+# Two ways to make functions ( def and lambda )
+
+# Two ways to manage scope and visibility ( global and nonlocal )
+
+# Two ways to send results back to callers ( return and yield )
+
+# global declares module-level variables that are to be assigned. By default, all names assigned in a function are local to that function and exist only while the function runs. To assign a name in the enclosing module, functions need to list it in a global statement.
+
+# except E as X .Because they might defer garbage collection’s memory recovery,
+
+# in 3.X, such variables are local to that except block, and in fact are removed when the block is exited (even if you’ve used it earlier in your code!).
+
+# In 2.X, these variables live on after the try statement.
+
+# because the nonlocal statement (available in Python 3.X but not 2.X) means that the assignment to X inside the nested function changes X in the enclosing function’s local scope.
+
+	def func(a, b, c):
+		a=2
+		b[0]='x'
+		c['a'] = 'y'
+
+	l=1; m=[1]; n={'a':0}
+
+	func(l, m, n)
+
+	print(l, m, n) # 1, [x], {'a':'y'}
+
+# This displays (1, ['x'], {'a': 'y'}) —the first assignment in the function doesn’t impact the caller, but the second two do because they change passed-in mutable objects in place.
+
+>>> sys.getrecursionlimit() # 1000 calls deep default
+1000
+
+>>> sys.setrecursionlimit(10000) # Allow deeper nesting
+
+>>> func.__code__.co_varnames
+('a', 'b')
+>>> func.__code__.co_argcount
+1
+
+# lambda -> An expression form that generates function objects.
+
+	$ lambda argument1, argument2,... argumentN : expression using arguments
+
+# Unlike normal functions that return a value and exit, generator functions automatically suspend and resume their execution and state around the point of value generation. (592)
+
+# Generator functions
+	A function def statement that contains a yield statement is turned into a generator function.
+
+# Generator expressions
+	A comprehension expression enclosed in parentheses is known as a generator expression.
+
+# Import enclosing module, Qualify to get to global version of name
+
+	x = 99
+	def selector():
+		import __main__
+		print(__main__.x)
+		x = 88
+		print(x)
+
+	selector()
+	print(x)
+
+# mutable default arguments retain their state between function calls,
+
+	def saver(x=[]):
+		x.append(1)
+		print(x)
+
+	saver() # [1] # grows on each call
+	saver() # [1, 1]
+	saver() # [1, 1, 1]
+
+# Won't grow here
+
+	def saver(x=None):
+		if x is None: # x = x or []
+			x = []
+		x.append(1)
+		print(x)
+
+***** Modules & Packages *****
+
+# import
+	Lets a client (importer) fetch a module as a whole
+
+# from
+	Allows clients to fetch particular names from a module
+
+# imp.reload ( reload in 2.X)
+	Provides a way to reload a module’s code without stopping Python
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

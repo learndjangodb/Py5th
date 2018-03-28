@@ -1,0 +1,23 @@
+# List all projects
+	
+	$ ssh -p 29418 vutuksre@192.168.2.182 gerrit ls-projects
+
+# Cloning
+
+	$ git clone ssh://vutuksre@192.168.2.182:29418/audio.git
+
+# git push
+	
+	$ git push ssh://vutuksre@192.168.2.182:29418/audio HEAD:refs/for/audio-vtech.lnx.1.0-dev
+
+# sending hooks
+
+	$ scp -p -P 29418 vutuksre@192.168.2.182:hooks/commit-msg .git/hooks/
+
+# ammend
+
+	$ git commit --amend
+
+# git push
+	
+	$ git push ssh://vutuksre@192.168.2.182:29418/audio HEAD:refs/for/audio-vtech.lnx.1.0-dev
