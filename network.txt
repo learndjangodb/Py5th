@@ -1,0 +1,70 @@
+Client: An end device interfacing with a human.
+Server: A device providing a service for clients.
+
+What is Net Code?
+# Client / server model
+
+# Clients connect in to the server to get information they require.
+
+# Peer-to-Peer model
+
+# Clients connect to other clients without use of a central server
+
+# Sockets are the programming abstractions for connections.
+
+# They allow us to communicate in a bidirectional manner.
+
+# We can use them to send data and receive data.
+
+# They implement the common transport protocols TCP and UDP.
+
+# Socket Methods
+
+# socket(socket_family, socket_type)
+The constructer creates a new socket.
+
+# bind((hostname, port))
+Bind takes a tuple of a host address and port
+
+# listen()
+Starts listening for TCP connections
+
+# accept()
+Accepts a connection when found.(returns a new socket)
+
+$ client side
+connect((hostname, port))
+Takes a tuple of the address and port.
+
+# recv(buffer)
+Tries to grab data from a TCP connection. (waits) The buffer size determines how many bytes of data to reveice at a time.
+
+# send(bytes)
+attempts to send the bytes given to it.
+
+# close()
+Closes a socket/connection and frees the port.
+
+TCP -> Trasmisson Control Protocol.
+
+Reliable Connection based protocol
+
+Ordered & Error checked(simple checksum)
+
+# used by web Browsers
+
+UDP -> User Dataram Protocol
+
+$ Un-Reliable Connection-less based protocol
+# Low Overhead
+# Used for VoIP, Online Games, Streaming
+
+# You will notice we use recvfrom() and sendto(). This is because UDP is Connectionless, we need to tell the data where to go when we send it.
+
+####### Basic SSH botNet ######
+
+What is a SSH?
+# An encrypted remote terminal connection
+# Allows command line access to the device
+# Most managed networks will use SSH for management of routers, switches and servers
+# 
